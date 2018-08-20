@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.lgx.weatherforecast"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+
+    //签名配置
+    signingConfigs {
+        staging.initWith(signingConfigs.debug)
+
+        release {
+            println rootProject.ext.signingConfig.storePassword
+            storeFile file("${projectDir}/lgx.keystore")
+            storePassword rootProject.ext.signingConfig.storePassword
+            keyAlias rootProject.ext.signingConfig.keyAlias
+            keyPassword rootProject.ext.signingConfig.keyPassword
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release //为了使百度地图可用，debug也签名
+        }
+
+        release {
+            minifyEnabled true //开启混淆
+            zipAlignEnabled true //Zipalign优化
+            shrinkResources true //删除无用的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    //指定jni目录和jar用同一个
+    sourceSets.main {
+        jniLibs.srcDirs = ['libs']
+    }
+
+    lintOptions {
+        //编译的 lint 开关，程序在buid的时候，会执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
+        abortOnError false
+    }
+
+    //dex相关配置
+    dexOptions {
+        //dex编译是否在单独的进程
+        dexInProcess true
+        //增量编译的时候会更快，但是clean的时候会使编译更慢
+        preDexLibraries true
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+
+    //apk重新命名
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = outputFile.name.replace("release.apk", "${defaultConfig.versionName}.apk")
+                fileName = fileName.replace("app-", "app_")
+                outputFile.name.replace(outputFile.name, fileName);
+            }
+        }
+    }
+
+    //打包时的相关配置，出现重复依赖相关的问题，可以在这边去掉
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    //aar目录位置
+    repositories.flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+}
