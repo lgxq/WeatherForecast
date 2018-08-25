@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -20,20 +19,10 @@ android {
         }
     }
 
-    //指定jni目录和jar用同一个
-    sourceSets.main {
-        jniLibs.srcDirs = ['libs']
-    }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.ext.kotlinVersion"
-    api "org.jetbrains.kotlin:kotlin-reflect:$rootProject.ext.kotlinVersion"
-
-    api "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
-    api "com.android.support:design:${rootProject.ext.supportVersion}"
-    api "com.android.support.constraint:constraint-layout:${rootProject.ext.dependencies.constraintLayout}"
+    api project(":business")
 }

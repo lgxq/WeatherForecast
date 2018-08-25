@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -9,6 +10,8 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
     //签名配置
@@ -56,7 +59,6 @@ android {
         dexInProcess true
         //增量编译的时候会更快，但是clean的时候会使编译更慢
         preDexLibraries true
-        incremental true
         javaMaxHeapSize "4g"
     }
 
@@ -67,7 +69,7 @@ android {
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 def fileName = outputFile.name.replace("release.apk", "${defaultConfig.versionName}.apk")
                 fileName = fileName.replace("app-", "app_")
-                outputFile.name.replace(outputFile.name, fileName);
+                outputFile.name.replace(outputFile.name, fileName)
             }
         }
     }
@@ -89,7 +91,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportVersion}"
 
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation project(":forecast")
+    implementation project(":news")
+    implementation project(":personal")
 }

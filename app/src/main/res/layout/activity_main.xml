@@ -6,13 +6,40 @@
     android:layout_height="match_parent"
     tools:context="com.lgx.weatherforecast.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/main_tab_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:background="#323232"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:tabTextColor="#9A9A9A"
+        app:tabSelectedTextColor="#3CACFF"
+        app:tabIndicatorHeight="0dp"
+        app:tabPadding="3dp">
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/main_tab_weather"
+            android:text="@string/main_tab_weather"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/main_tab_news"
+            android:text="@string/main_tab_news"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/main_tab_personal"
+            android:text="@string/main_tab_personal"/>
+    </android.support.design.widget.TabLayout>
+
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintBottom_toTopOf="@id/main_tab_layout" />
 
 </android.support.constraint.ConstraintLayout>
