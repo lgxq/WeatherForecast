@@ -2,10 +2,8 @@ package com.lgx.library.utils
 
 import kotlin.reflect.KAnnotatedElement
 import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.full.functions
 import kotlin.reflect.jvm.isAccessible
 import kotlin.reflect.jvm.javaField
-import kotlin.reflect.jvm.javaMethod
 
 /**
  * Created by liugaoxin on 2018/8/25.
@@ -15,9 +13,10 @@ import kotlin.reflect.jvm.javaMethod
 //定义辅助内联函数
 inline fun <reified T> KAnnotatedElement.findAnnotation(): T? = annotations.filterIsInstance<T>().firstOrNull()
 
-//顶层函数
+//顶层函数，解析BindView的注解
 fun parseFind(obj: Any) {
-    val kFunction = obj.javaClass.kotlin.functions.firstOrNull { it.name == "findViewById" }
+    //val kFunction = obj.javaClass.kotlin.functions.firstOrNull { it.name == "findViewById" }
+    val method = obj.javaClass.getMethod("findViewById", Int::class.java)
 
     obj.javaClass.kotlin.declaredMemberProperties
             .filter { it.findAnnotation<BindView>() != null }
@@ -29,6 +28,6 @@ fun parseFind(obj: Any) {
                 }
 
                 it.isAccessible = true
-                it.javaField?.set(obj, kFunction?.javaMethod?.invoke(obj, id))
+                it.javaField?.set(obj, method?.invoke(obj, id))
             }
 }

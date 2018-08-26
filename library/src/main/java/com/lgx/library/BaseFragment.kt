@@ -13,7 +13,7 @@ import android.widget.Toast
  * fragment基类
  */
 abstract class BaseFragment: Fragment() {
-    private lateinit var mToast: Toast
+    private var mToast: Toast? = null
 
     abstract fun getLayoutId(): Int
     abstract fun initView(rootView: View)
@@ -28,10 +28,12 @@ abstract class BaseFragment: Fragment() {
     fun toast(message: String) {
         if(mToast == null) {
             mToast = Toast.makeText(activity, "", Toast.LENGTH_SHORT)
+        } else {
+            mToast?.cancel()
         }
 
-        mToast.setText(message)
-        mToast.show()
+        mToast?.setText(message)
+        mToast?.show()
     }
 
     fun jumpActivity(clazz: Class<*>) {
