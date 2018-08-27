@@ -1,1 +1,9 @@
-include ':app', ':library', ':business', ':forecast', ':news', ':personal'
+include ':APP', ':CommonLibrary', ':CommonBusiness', ':BusinessForecast', ':BusinessNews', ':BusinessPersonal'
+
+//强迫症，Android视图统一命名
+project(':APP').projectDir = new File('./app')
+project(':CommonLibrary').projectDir = new File('./library')
+project(':CommonBusiness').projectDir = new File('./business')
+project(':BusinessForecast').projectDir = new File('./forecast')
+project(':BusinessNews').projectDir = new File('./news')
+project(':BusinessPersonal').projectDir = new File('./personal')

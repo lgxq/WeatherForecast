@@ -92,7 +92,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api project(":forecast")
-    api project(":news")
-    api project(":personal")
+    api project(":BusinessForecast")
+    api project(":BusinessNews")
+    api project(":BusinessPersonal")
 }
