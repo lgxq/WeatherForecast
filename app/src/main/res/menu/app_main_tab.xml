@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/main_tab_weather"
+        android:title="@string/main_tab_weather"
+        android:icon="@drawable/main_tab_weather"/>
+
+    <item android:id="@+id/main_tab_news"
+        android:title="@string/main_tab_news"
+        android:icon="@drawable/main_tab_news"/>
+
+    <item android:id="@+id/main_tab_personal"
+        android:title="@string/main_tab_personal"
+        android:icon="@drawable/main_tab_personal"/>
+</menu>

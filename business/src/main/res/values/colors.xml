@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_navigator_back">#323232</color>
+    <color name="app_navigator_unchecked">#9A9A9A</color>
+    <color name="app_navigator_check">#3CACFF</color>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--library定义一些通用数据，其它在business中-->
+    <color name="app_theme">#4A98E4</color>
+    <color name="text_theme">#ffffff</color>
+    <color name="page_back">#ffffff</color>
+
+    <color name="text_deep">#000000</color>
+    <color name="text_common">#3C3C3C</color>
+    <color name="text_light">#8c8c8c</color>
+</resources>

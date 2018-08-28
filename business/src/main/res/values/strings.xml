@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">business</string>
 
-
+    <!--app module-->
+    <string name="welcome_bottom_title">假的墨迹天气</string>
+    <string name="welcome_bottom_detail">一个还不能预报的APP</string>
     <string name="main_tab_weather">天气</string>
     <string name="main_tab_news">资讯</string>
     <string name="main_tab_personal">我</string>
+
 </resources>

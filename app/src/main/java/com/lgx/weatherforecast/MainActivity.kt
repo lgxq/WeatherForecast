@@ -1,7 +1,7 @@
 package com.lgx.weatherforecast
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import com.lgx.forecast.ForecastMainFragment
 import com.lgx.library.BaseActivity
@@ -23,8 +23,8 @@ class MainActivity: BaseActivity() {
         val mList = listOf(TAG_FORECAST, TAG_NEWS, TAG_PERSONAL)
     }
 
-    @BindView(id = R.id.main_tab_layout)
-    private lateinit var mTabLayout: TabLayout
+    @BindView(id = R.id.main_navigation_view)
+    private lateinit var mNavigation: BottomNavigationView
 
     @Override
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,24 +37,24 @@ class MainActivity: BaseActivity() {
     }
 
     private fun initTabLayout() {
-        mTabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                //do nothing
+        mNavigation.setOnNavigationItemSelectedListener { item ->
+            val tag = when(item.itemId) {
+                R.id.main_tab_weather -> TAG_FORECAST
+                R.id.main_tab_news -> TAG_NEWS
+                R.id.main_tab_personal -> TAG_PERSONAL
+                else -> TAG_FORECAST
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                //do nothing
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-               onTabChange(mList[mTabLayout.selectedTabPosition])
-            }
-
-        })
+            onTabChange(tag)
+            true
+        }
     }
 
+    //切换tab
     private fun onTabChange(tabTag: String) {
         var fragment: Fragment? = supportFragmentManager.findFragmentByTag(tabTag)
+        val transaction = supportFragmentManager.beginTransaction()
+
         if(fragment == null) {
             fragment = when(tabTag) {
                 TAG_FORECAST -> ForecastMainFragment()
@@ -62,19 +62,15 @@ class MainActivity: BaseActivity() {
                 TAG_PERSONAL -> PersonalMainFragment()
                 else -> throw IllegalAccessException("not have such fragment")
             }
-            supportFragmentManager.beginTransaction().add(R.id.main_content, fragment, tabTag).commit()
+
+            transaction.add(R.id.main_content, fragment, tabTag)
         }
 
-        hideAllFragment()
-        supportFragmentManager.beginTransaction().show(fragment).commit()
-    }
+        //隐藏所有fragment
+        mList.map { supportFragmentManager.findFragmentByTag(it) }
+                .filter { it != null && !it.isHidden }
+                .forEach { transaction.hide(it) }
 
-    private fun hideAllFragment() {
-        for (tag in mList) {
-            val fragment: Fragment? = supportFragmentManager.findFragmentByTag(tag)
-            if(fragment != null && !fragment.isHidden) {
-                supportFragmentManager.beginTransaction().hide(fragment).commit()
-            }
-        }
+        transaction.show(fragment).commit()
     }
 }

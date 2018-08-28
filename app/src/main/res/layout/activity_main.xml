@@ -9,36 +9,19 @@
     <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff"
-        app:layout_constraintBottom_toTopOf="@id/main_tab_layout" />
+        android:layout_height="0dp"
+        android:background="@color/page_back"
+        app:layout_constraintBottom_toTopOf="@id/main_navigation_view"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/main_tab_layout"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/main_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#323232"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:tabTextColor="#9A9A9A"
-        app:tabSelectedTextColor="#3CACFF"
-        app:tabIndicatorHeight="0dp">
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/main_tab_weather"
-            android:text="@string/main_tab_weather"/>
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/main_tab_news"
-            android:text="@string/main_tab_news"/>
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:icon="@drawable/main_tab_personal"
-            android:text="@string/main_tab_personal"/>
-    </android.support.design.widget.TabLayout>
+        app:itemBackground="@color/app_navigator_back"
+        app:itemIconTint="@color/color_main_tab_text"
+        app:itemTextColor="@color/color_main_tab_text"
+        app:menu="@menu/app_main_tab"/>
 
 </android.support.constraint.ConstraintLayout>
