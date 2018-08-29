@@ -1,14 +1,8 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="WelcomeTheme" parent="AppTheme">
+    <!--闪屏页主题，关于有虚拟导航栏windowBackground占用导航栏的问题，
+    解决方案1：activity不使用v7的activity并且theme使用@android:style/Theme.Light，这样会让activity保持在虚拟导航栏之上。
+    解决方案2：android:windowTranslucentNavigation导航栏设为透明，会让其一直保持在底部-->
+    <style name="WelcomeTheme" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/welcome_theme_bg</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>

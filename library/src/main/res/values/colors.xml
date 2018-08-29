@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#4A98E4</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
     <!--library定义一些通用数据，其它在business中-->
     <color name="app_theme">#4A98E4</color>
     <color name="text_theme">#ffffff</color>

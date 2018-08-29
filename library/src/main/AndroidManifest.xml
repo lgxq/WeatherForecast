@@ -1,2 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lgx.library" />
+    package="com.lgx.library" >
+
+    <application>
+
+        <!--屏幕适配方案-->
+        <meta-data android:name="MaxWidthDp"
+            android:value="360"/>
+    </application>
+
+</manifest>

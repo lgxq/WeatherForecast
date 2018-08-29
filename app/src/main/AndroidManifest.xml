@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.lgx.weatherforecast">
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/BaseTheme"
+        android:name=".AppApplication"
+        android:allowBackup="false"
+        tools:replace="icon,theme,android:allowBackup">
+
         <activity android:name=".WelcomeActivity"
-            android:theme="@style/WelcomeTheme">
+            android:theme="@style/WelcomeTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +23,25 @@
             </intent-filter>
         </activity>
 
+
         <activity android:name=".MainActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <!--支持从浏览器启动activity-->
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <!--如下配置的话，在html中调用scheme://host/xxxx则会启动该activity-->
+                <!--启动后调用getIntent.getData可以拿到完整的url，然后做相应的处理-->
+                <data
+                    android:host="lgx.weather.com"
+                    android:scheme="weather"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

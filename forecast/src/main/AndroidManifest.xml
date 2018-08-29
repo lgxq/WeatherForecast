@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lgx.forecast" />
+    package="com.lgx.forecast">
+    <application
+        android:theme="@style/BaseTheme">
+
+    </application>
+</manifest>
