@@ -25,6 +25,8 @@ abstract class BaseActivity: AppCompatActivity() {
     fun setDensity() {
         val metaData = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
         val maxWidth = metaData.metaData.getInt(BaseApplication.KEY_MAX_WIDTH_DP)
-        resources.displayMetrics.density = resources.displayMetrics.widthPixels / 1.0f / maxWidth
+        if(maxWidth > 0) {
+            resources.displayMetrics.density = resources.displayMetrics.widthPixels / 1.0f / maxWidth
+        }
     }
 }
