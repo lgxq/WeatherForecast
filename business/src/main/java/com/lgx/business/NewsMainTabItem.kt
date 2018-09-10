@@ -7,7 +7,7 @@ import android.os.Parcelable
  * Created by liugaoxin on 2018/9/7.
  * 新闻主页的title
  */
-class NewMainTabItem(var title: String = "", var id: Int = 0): Parcelable {
+class NewsMainTabItem(var title: String = "", var id: Int = 0): Parcelable {
     constructor(parcel: Parcel) : this() {
         title = parcel.readString()
         id = parcel.readInt()
@@ -22,12 +22,12 @@ class NewMainTabItem(var title: String = "", var id: Int = 0): Parcelable {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<NewMainTabItem> {
-        override fun createFromParcel(parcel: Parcel): NewMainTabItem {
-            return NewMainTabItem(parcel)
+    companion object CREATOR : Parcelable.Creator<NewsMainTabItem> {
+        override fun createFromParcel(parcel: Parcel): NewsMainTabItem {
+            return NewsMainTabItem(parcel)
         }
 
-        override fun newArray(size: Int): Array<NewMainTabItem?> {
+        override fun newArray(size: Int): Array<NewsMainTabItem?> {
             return arrayOfNulls(size)
         }
     }

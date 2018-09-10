@@ -3,6 +3,7 @@ package com.lgx.news
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.view.View
+import com.lgx.business.NewsMainTabItem
 import com.lgx.library.BaseFragment
 
 /**
@@ -30,6 +31,13 @@ class NewsMainFragment: BaseFragment() {
             mTabLayout.addTab(tab)
         }
 
+        mViewPager.adapter = NewsMainAdapter(getTestItem(), fragmentManager!!)
         mTabLayout.setupWithViewPager(mViewPager)
+    }
+
+    private fun getTestItem(): List<NewsMainTabItem> {
+        return (0 until mTitles.size)
+                .map { NewsMainTabItem(mTitles[it], it) }
+                .toMutableList()
     }
 }

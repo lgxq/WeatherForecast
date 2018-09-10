@@ -3,22 +3,28 @@ package com.lgx.news
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.lgx.business.NewMainTabItem
+import com.lgx.business.NewsMainTabItem
 
 /**
  * Created by liugaoxin on 2018/9/7.
  * 新闻主页ViewVPager适配器
  */
-class NewsMainAdapter(val mModels: List<NewMainTabItem>, fragmentManager: FragmentManager): FragmentPagerAdapter(fragmentManager) {
+class NewsMainAdapter(private val mModels: List<NewsMainTabItem>, fragmentManager: FragmentManager): FragmentPagerAdapter(fragmentManager) {
+    private val mFragmentList: MutableList<Fragment> = arrayListOf()
+
     override fun getItem(position: Int): Fragment {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if(mFragmentList.elementAtOrNull(position) == null) {
+            mFragmentList.add(position, NewsItemFragment.getInstance(mModels[position]))
+        }
+
+        return mFragmentList[position]
     }
 
     override fun getCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return mModels.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return super.getPageTitle(position)
+        return mModels[position].title
     }
 }
